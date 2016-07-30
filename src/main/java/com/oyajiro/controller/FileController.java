@@ -22,7 +22,7 @@ public class FileController {
 	private FileRepositoryService repository;
 
 	@ApiOperation("Create file")
-	@RequestMapping(method = RequestMethod.POST, value = "/upload")
+	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	@ResponseStatus(HttpStatus.OK)
 	public File create(@RequestParam("file") MultipartFile data) {
 		File entityFile = new File(data.getOriginalFilename(), data.getContentType(), data.getSize());
@@ -75,7 +75,7 @@ public class FileController {
 	}
 
 	@ApiOperation("Update file")
-	@RequestMapping(method = RequestMethod.PUT, value = "/upload")
+	@RequestMapping(method = RequestMethod.PUT, value = "/update")
 	@ResponseStatus(HttpStatus.OK)
 	public File update(File file, String id) {
 		File entityFile = getOrThrowNotFound(repository.findById(id), id);
