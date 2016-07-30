@@ -1,6 +1,6 @@
 package com.oyajiro.document;
 
-import com.oyajiro.entity.File;
+import com.oyajiro.entity.MediaFile;
 import com.oyajiro.entity.Tag;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -24,14 +24,14 @@ public class FileDocument {
 
     private List<String> tags;
 
-    public static FileDocument fromFile(File file) {
+    public static FileDocument fromFile(MediaFile mediaFile) {
         FileDocument fileDocument = new FileDocument();
-        fileDocument.id = file.getId();
-        fileDocument.ownerLogin = file.getOwner().getLogin();
-        fileDocument.name = file.getName();
-        fileDocument.type = file.getType();
-        fileDocument.path = file.getPath();
-        fileDocument.tags = file.getTags().stream().map(tag -> tag.getName()).collect(Collectors.toList());
+        fileDocument.id = mediaFile.getId();
+        fileDocument.ownerLogin = mediaFile.getOwner().getLogin();
+        fileDocument.name = mediaFile.getName();
+        fileDocument.type = mediaFile.getType();
+        fileDocument.path = mediaFile.getPath();
+        fileDocument.tags = mediaFile.getTags().stream().map(tag -> tag.getName()).collect(Collectors.toList());
         return fileDocument;
     }
 

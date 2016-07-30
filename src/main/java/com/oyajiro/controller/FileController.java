@@ -1,6 +1,6 @@
 package com.oyajiro.controller;
 
-import com.oyajiro.entity.File;
+import com.oyajiro.entity.MediaFile;
 import com.oyajiro.service.FileRepositoryService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,63 +24,63 @@ public class FileController {
 	@ApiOperation("Create file")
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	@ResponseStatus(HttpStatus.OK)
-	public File create(@RequestParam("file") MultipartFile data) {
-		File entityFile = new File(data.getOriginalFilename(), data.getContentType(), data.getSize());
+	public MediaFile create(@RequestParam("fileData") MultipartFile data) {
+		MediaFile mediaFile = new MediaFile(data.getOriginalFilename(), data.getContentType(), data.getSize());
 		String path = writeToDisk(data);
-		entityFile.setPath(path);
-		if (entityFile.getPath().isEmpty()) {
+		mediaFile.setPath(path);
+		if (mediaFile.getPath().isEmpty()) {
 			throw internalServerErrorException();
 		}
 		//TODO set user
-		repository.save(entityFile);
-		return entityFile;
+		repository.save(mediaFile);
+		return mediaFile;
 	}
 
 	@ApiOperation("Update file data")
 	@RequestMapping(method = RequestMethod.PUT, value = "/upload")
 	@ResponseStatus(HttpStatus.OK)
-	public File upload(@RequestParam("file") MultipartFile data, String id) {
-		File entityFile = getOrThrowNotFound(repository.findById(id), id);
-		String oldPath = entityFile.getPath();
+	public MediaFile upload(@RequestParam("file") MultipartFile data, String id) {
+		MediaFile mediaFile = getOrThrowNotFound(repository.findById(id), id);
+		String oldPath = mediaFile.getPath();
 		String path = writeToDisk(data);
-		entityFile.setPath(path);
-		if (entityFile.getPath().isEmpty()) {
+		mediaFile.setPath(path);
+		if (mediaFile.getPath().isEmpty()) {
 			throw internalServerErrorException();
 		}
 		//TODO set user
-		repository.save(entityFile);
+		repository.save(mediaFile);
 		deleteFile(oldPath);
-		return entityFile;
+		return mediaFile;
 	}
 
 	@ApiOperation("Get file by id")
 	@RequestMapping(method = RequestMethod.GET, value = "/get")
 	@ResponseStatus(HttpStatus.OK)
-	public File get(@RequestParam("id") String id) {
+	public MediaFile get(@RequestParam("id") String id) {
 		return getOrThrowNotFound(repository.findById(id), id);
 	}
 
 	@ApiOperation("Get all files")
 	@RequestMapping(method = RequestMethod.GET, value = "/all")
 	@ResponseStatus(HttpStatus.OK)
-	public List<File> getAll() {
+	public List<MediaFile> getAll() {
 		return repository.findAll();
 	}
 
 	@ApiOperation("Search files")
 	@RequestMapping(method = RequestMethod.GET, value = "/search")
 	@ResponseStatus(HttpStatus.OK)
-	public List<File> search(@RequestParam("id") String query) {
+	public List<MediaFile> search(@RequestParam("id") String query) {
 		return Collections.emptyList();
 	}
 
-	@ApiOperation("Update file")
+	@ApiOperation("Update mediaFile")
 	@RequestMapping(method = RequestMethod.PUT, value = "/update")
 	@ResponseStatus(HttpStatus.OK)
-	public File update(File file, String id) {
-		File entityFile = getOrThrowNotFound(repository.findById(id), id);
-		repository.updateFile(file, entityFile);
-		return entityFile;
+	public MediaFile update(MediaFile mediaFile, String id) {
+		MediaFile entityFile = getOrThrowNotFound(repository.findById(id), id);
+		repository.updateFile(mediaFile, entityFile);
+		return mediaFile;
 	}
 
 	@Autowired

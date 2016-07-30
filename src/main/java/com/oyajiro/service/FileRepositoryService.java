@@ -1,7 +1,7 @@
 package com.oyajiro.service;
 
 import com.oyajiro.document.FileDocument;
-import com.oyajiro.entity.File;
+import com.oyajiro.entity.MediaFile;
 import com.oyajiro.repository.FileRepository;
 import com.oyajiro.repository.FileSearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +33,11 @@ public class FileRepositoryService {
         this.searchRepository = searchRepository;
     }
 
-    public File findById(String id) {
+    public MediaFile findById(String id) {
         return getOrThrowNotFound(fileRepository.findById(id), id);
     }
 
-    public List<File> findAll() {
+    public List<MediaFile> findAll() {
         return fileRepository.findAll();
     }
 
@@ -45,12 +45,12 @@ public class FileRepositoryService {
         return searchRepository.findAll();
     }
 
-    public void save(File entityFile) {
+    public void save(MediaFile entityFile) {
         fileRepository.save(entityFile);
         searchRepository.save(fromFile(entityFile));
     }
 
-    public File updateFile(File from, File to) {
+    public MediaFile updateFile(MediaFile from, MediaFile to) {
         updateFileDocument(from);
         if (!from.equals(to)) {
             setIfNotEmpty(from.getName(), to::setName);
@@ -60,7 +60,7 @@ public class FileRepositoryService {
         return to;
     }
 
-    private void updateFileDocument(File from) {
+    private void updateFileDocument(MediaFile from) {
         FileDocument fileDocument = searchRepository.findOne(from.getId());
         if (fileDocument != null) {
             setIfNotEmpty(from.getName(), fileDocument::setName);

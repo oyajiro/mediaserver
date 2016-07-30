@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import java.util.List;
 
 
-public class File extends BaseEntity {
+public class MediaFile extends BaseEntity {
 
 	@DBRef
 	private User owner;
@@ -19,7 +19,7 @@ public class File extends BaseEntity {
 	@DBRef
 	private List<Tag> tags;
 
-	public File(String name, String type, long size) {
+	public MediaFile(String name, String type, long size) {
 		this.name = name;
 		this.type = type;
 	}
@@ -76,7 +76,7 @@ public class File extends BaseEntity {
 
 	@Override
 	public String toString() {
-		final StringBuffer sb = new StringBuffer("File{");
+		final StringBuffer sb = new StringBuffer("MediaFile{");
 		sb.append("id=").append(getId());
 		sb.append(", name='").append(name).append('\'');
 		sb.append(", type='").append(type).append('\'');
