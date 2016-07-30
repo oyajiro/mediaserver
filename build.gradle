@@ -33,6 +33,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-security')
+//	compile('org.springframework.boot:spring-boot-starter-security')
+	compile("io.springfox:springfox-swagger2:2.5.0")
+	compile("io.springfox:springfox-swagger-ui:2.5.0")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

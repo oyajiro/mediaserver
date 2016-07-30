@@ -5,4 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface FileRepository extends MongoRepository<File, Integer> {
 	File findByName(String name);
+	File findById(String id);
 }
