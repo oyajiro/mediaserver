@@ -16,7 +16,7 @@ apply plugin: 'java'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'mediahosting'
+	baseName = 'MediaHosting'
 	version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -33,6 +33,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
 //	compile('org.springframework.boot:spring-boot-starter-security')
 	compile("io.springfox:springfox-swagger2:2.5.0")
 	compile("io.springfox:springfox-swagger-ui:2.5.0")

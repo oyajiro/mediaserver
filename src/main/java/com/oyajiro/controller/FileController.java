@@ -1,8 +1,7 @@
 package com.oyajiro.controller;
 
 import com.oyajiro.entity.File;
-import com.oyajiro.repository.FileRepository;
-import com.oyajiro.service.FileService;
+import com.oyajiro.service.FileRepositoryService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,7 @@ import static com.oyajiro.utils.EntityUtils.getOrThrowNotFound;
 @RestController
 public class FileController {
 
-	private FileRepository repository;
+	private FileRepositoryService repository;
 
 	@ApiOperation("Create file")
 	@RequestMapping(method = RequestMethod.POST, value = "/upload")
@@ -80,12 +79,12 @@ public class FileController {
 	@ResponseStatus(HttpStatus.OK)
 	public File update(File file, String id) {
 		File entityFile = getOrThrowNotFound(repository.findById(id), id);
-		FileService.updateFile(file, entityFile);
+		repository.updateFile(file, entityFile);
 		return entityFile;
 	}
 
 	@Autowired
-	protected void setRepository(FileRepository repository) {
+	protected void setRepository(FileRepositoryService repository) {
 		this.repository = repository;
 	}
 }

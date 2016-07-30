@@ -1,7 +1,9 @@
 package com.oyajiro.entity;
 
-import java.util.List;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import java.util.List;
+
 
 public class File extends BaseEntity {
 
@@ -12,8 +14,6 @@ public class File extends BaseEntity {
 
 	private String type;
 
-	private long size;
-
 	private String path;
 
 	@DBRef
@@ -22,7 +22,6 @@ public class File extends BaseEntity {
 	public File(String name, String type, long size) {
 		this.name = name;
 		this.type = type;
-		this.size = size;
 	}
 
 	public User getOwner() {
@@ -46,6 +45,10 @@ public class File extends BaseEntity {
 		tags.remove(tag);
 	}
 
+	public void replaceTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,13 +65,6 @@ public class File extends BaseEntity {
 		this.type = type;
 	}
 
-	public long getSize() {
-		return size;
-	}
-
-	public void setSize(long size) {
-		this.size = size;
-	}
 
 	public String getPath() {
 		return path;
@@ -84,7 +80,6 @@ public class File extends BaseEntity {
 		sb.append("id=").append(getId());
 		sb.append(", name='").append(name).append('\'');
 		sb.append(", type='").append(type).append('\'');
-		sb.append(", size=").append(size);
 		sb.append(", path='").append(path).append('\'');
 		sb.append('}');
 		return sb.toString();
