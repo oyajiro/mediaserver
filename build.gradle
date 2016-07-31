@@ -17,8 +17,13 @@ apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'MediaHosting'
-	version = '0.0.1-SNAPSHOT'
 }
+version = '0.1'
+
+processResources {
+	expand(project.properties)
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -34,6 +39,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 //	compile('org.springframework.boot:spring-boot-starter-security')
 	compile("io.springfox:springfox-swagger2:2.0.2")
 	compile("io.springfox:springfox-swagger-ui:2.0.2")

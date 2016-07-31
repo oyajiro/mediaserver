@@ -12,6 +12,11 @@ import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
  */
 //TODO add LOGGER
 public class RestControllerException extends WebApplicationException {
+
+    public RestControllerException(Throwable cause) {
+        super(cause, Response.Status.EXPECTATION_FAILED);
+    }
+
     public RestControllerException(String message) {
         super(message, Response.Status.EXPECTATION_FAILED);
     }

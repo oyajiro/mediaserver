@@ -3,6 +3,8 @@ package com.oyajiro.document;
 import com.oyajiro.entity.MediaFile;
 import com.oyajiro.entity.Tag;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ public class FileDocument {
 
     private String path;
 
+    @Field(type= FieldType.Nested)
     private List<String> tags;
 
     public static FileDocument fromFile(MediaFile mediaFile) {

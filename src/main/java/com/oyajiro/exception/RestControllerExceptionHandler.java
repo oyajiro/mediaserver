@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RestControllerExceptionHandler {
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
-    @ExceptionHandler(RestControllerException.class)
-    public String handleRestControllerException(RestControllerException e) {
+    @ExceptionHandler(Exception.class)
+    public String handleRestControllerException(Throwable e) {
         //TODO log exception
-        return e.getMessage();
+        throw new RestControllerException(e);
     }
 }

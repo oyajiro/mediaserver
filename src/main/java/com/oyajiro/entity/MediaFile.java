@@ -2,6 +2,7 @@ package com.oyajiro.entity;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,9 +20,10 @@ public class MediaFile extends BaseEntity {
 	@DBRef
 	private List<Tag> tags;
 
-	public MediaFile(String name, String type, long size) {
+	public MediaFile(String name, String type) {
 		this.name = name;
 		this.type = type;
+		tags = new ArrayList<>();
 	}
 
 	public User getOwner() {

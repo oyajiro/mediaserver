@@ -7,6 +7,7 @@ import com.oyajiro.repository.FileSearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -58,6 +59,13 @@ public class FileRepositoryService {
             setIfNotEmpty(from.getPath(), to::setPath);
         }
         return to;
+    }
+
+    public List<FileDocument> search(String search) {
+        List<FileDocument> documents = new ArrayList<>();
+        documents.addAll(searchRepository.findByNameContaining(search));
+        documents.addAll(searchRepository.findByTagsContaining(search));
+        return documents;
     }
 
     private void updateFileDocument(MediaFile from) {
